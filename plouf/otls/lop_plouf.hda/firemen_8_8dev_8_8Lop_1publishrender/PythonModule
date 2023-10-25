@@ -1,0 +1,11 @@
+import nodegraphtopui
+
+def get_node(kwargs):
+    return kwargs['node'].parm('targettopnetwork').evalAsNode()
+
+def cook(kwargs):
+    nodegraphtopui.dirtyAll(get_node(kwargs), False)
+    nodegraphtopui.cookOutputNode(get_node(kwargs))
+     
+def cancel(kwargs):
+    nodegraphtopui.cancelCook(get_node(kwargs))

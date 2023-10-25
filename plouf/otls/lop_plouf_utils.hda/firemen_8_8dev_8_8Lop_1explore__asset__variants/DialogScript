@@ -1,0 +1,28 @@
+# Dialog script for firemen::dev::explore_asset_variants automatically generated
+
+{
+    name	firemen::dev::explore_asset_variants
+    script	firemen::dev::explore_asset_variants
+    label	"Explore Asset Variants (Dev)"
+
+    help {
+	""
+    }
+
+    inputlabel	1	"Input Stage"
+    inputlabel	2	"Input 2"
+    inputlabel	3	"Input 3"
+    inputlabel	4	"Input 4"
+
+    parm {
+        name    "filepath"
+        label   "Reference File"
+        type    file
+        default { "$MS_USD/3d/ModularMetalPipePack_ubrqeehhx/ModularMetalPipePack_ubrqeehhx.usd" }
+        menureplace {
+            [ "opmenu -l -a assetreference1 filepath" ]
+        }
+        parmtag { "autoscope" "0000000000000000" }
+        parmtag { "script_callback_language" "python" }
+    }
+}

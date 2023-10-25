@@ -1,0 +1,432 @@
+# Dialog script for publishusdcache automatically generated
+
+{
+    name	publishusdcache
+    script	publishvdb
+    label	"Publish USD Cache"
+
+    help {
+	""
+    }
+
+    inputlabel	1	"VDB & Volumes to Cache"
+    inputlabel	2	"Sub-Network Input #2"
+    inputlabel	3	"Sub-Network Input #3"
+    inputlabel	4	"Sub-Network Input #4"
+
+    groupsimple {
+        name    "topnetworkcookcontrols2"
+        label   "TOP Network Cook Controls"
+        invisibletab
+
+        parm {
+            name    "targettopnetwork"
+            label   "Top Network"
+            type    oppath
+            default { "./topnet1" }
+            help    "None"
+            parmtag { "opfilter" "!!TOP!!" }
+            parmtag { "oprelative" "." }
+            parmtag { "script_callback" "" }
+            parmtag { "script_callback_language" "python" }
+            parmtag { "spare_category" "TOPCookControls" }
+        }
+        parm {
+            name    "_cook_controls_generatestaticworkitems"
+            label   "Generate Static Work Items"
+            type    button
+            joinnext
+            default { "0" }
+            help    "None"
+            parmtag { "script_callback" "import nodegraphtopui; nodegraphtopui.generateStatic(kwargs['node'].parm('targettopnetwork').evalAsNode())" }
+            parmtag { "script_callback_language" "python" }
+            parmtag { "spare_category" "TOPCookControls" }
+        }
+        parm {
+            name    "_cook_controls_cookoutputnode"
+            label   "Cook Output Node"
+            type    button
+            joinnext
+            default { "0" }
+            help    "None"
+            parmtag { "script_callback" "import nodegraphtopui; nodegraphtopui.cookOutputNode(kwargs['node'].parm('targettopnetwork').evalAsNode())" }
+            parmtag { "script_callback_language" "python" }
+            parmtag { "spare_category" "TOPCookControls" }
+        }
+        parm {
+            name    "_cook_controls_cancelcook"
+            label   "Cancel Cook"
+            type    button
+            joinnext
+            default { "0" }
+            help    "None"
+            parmtag { "script_callback" "import nodegraphtopui; nodegraphtopui.cancelCook(kwargs['node'].parm('targettopnetwork').evalAsNode())" }
+            parmtag { "script_callback_language" "python" }
+            parmtag { "spare_category" "TOPCookControls" }
+        }
+        parm {
+            name    "_cook_controls_dirtyall"
+            label   "Dirty All"
+            type    button
+            joinnext
+            default { "0" }
+            help    "None"
+            parmtag { "script_callback" "import nodegraphtopui; nodegraphtopui.dirtyAll(kwargs['node'].parm('targettopnetwork').evalAsNode(), False)" }
+            parmtag { "script_callback_language" "python" }
+            parmtag { "spare_category" "TOPCookControls" }
+        }
+        parm {
+            name    "_cook_controls_deleteresults"
+            label   "Delete All File Outputs From Disk"
+            type    button
+            default { "0" }
+            help    "None"
+            parmtag { "script_callback" "import nodegraphtopui; nodegraphtopui.dirtyAll(kwargs['node'].parm('targettopnetwork').evalAsNode(), True)" }
+            parmtag { "script_callback_language" "python" }
+            parmtag { "spare_category" "TOPCookControls" }
+        }
+    }
+
+    groupsimple {
+        name    "folder17"
+        label   "PUBLISH SETTINGS"
+
+        parm {
+            name    "sepparm8"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "execute"
+            label   "PUBLISH"
+            type    button
+            joinnext
+            default { "0" }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "button_icon" "" }
+            parmtag { "script_callback" "hou.phm().cb_publish(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+            parmtag { "takecontrol" "always" }
+        }
+        parm {
+            name    "cancel"
+            label   "Cancel Cook"
+            type    button
+            joinnext
+            default { "0" }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "button_icon" "" }
+            parmtag { "script_callback" "hou.phm().cancel_cook(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+            parmtag { "takecontrol" "always" }
+        }
+        parm {
+            name    "explore"
+            label   "Explore"
+            type    button
+            joinnext
+            default { "0" }
+            parmtag { "script_callback" "hou.phm().explore(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "t_usd_per_frame"
+            label   "Make One USD Per Frame"
+            type    toggle
+            joinnext
+            default { "1" }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "t_usdlayer"
+            label   "Make One USD Per Frame"
+            type    toggle
+            invisible
+            joinnext
+            default { "1" }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "t_history"
+            label   "Enable Publish History"
+            type    toggle
+            invisible
+            joinnext
+            default { "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "t_resolveDependencies"
+            label   "Auto Resolve Unpublished Dependencies"
+            type    toggle
+            invisible
+            default { "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm9"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "publish_path_info"
+            label   "Publish Path :"
+            type    label
+            nolabel
+            default { "" }
+        }
+        parm {
+            name    "sepparm2"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "history_version"
+            label   "version"
+            type    string
+            invisible
+            nolabel
+            default { "v000" }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "t_frames"
+            label   "Time Dependent"
+            type    toggle
+            default { "1" }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "trange"
+            label   "Valid Frame Range"
+            type    ordinal
+            default { "1" }
+            disablewhen "{ t_frames == 0 }"
+            menu usetokenvalue {
+                "off"       "Render Current Frame"
+                "normal"    "Render Specific Frame Range"
+            }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "f"
+            label   "Start/End"
+            type    float
+            size    2
+            default { [ "$FSTART" hscript-expr ] [ "$FEND" hscript-expr ] }
+            disablewhen "{ trange == 0 } { t_frames == 0 }"
+            range   { 0 10 }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm7"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "entity_type"
+            label   "Entity Type"
+            type    string
+            default { "shots" }
+            menu {
+                "assets"    "assets"
+                "shots"     "shots"
+            }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm6"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "entity_subtype"
+            label   "Sequence / Asset Type"
+            type    string
+            default { "s00" }
+            menureplace {
+                [ "from plouf import utils, Publish" ]
+                [ "import os" ]
+                [ "" ]
+                [ "node = hou.node('.')" ]
+                [ "" ]
+                [ "publish = Publish.Publish(node)" ]
+                [ "" ]
+                [ "path = os.path.join(publish.root," ]
+                [ "                    publish.project," ]
+                [ "                    publish.entity_type)" ]
+                [ "                    " ]
+                [ "return utils.menuFromDir(path)" ]
+                language python
+            }
+            parmtag { "editor" "0" }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm4"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "entity_name"
+            label   "Shot / Asset"
+            type    string
+            default { "p010" }
+            menureplace {
+                [ "from plouf import utils, Publish" ]
+                [ "import os" ]
+                [ "" ]
+                [ "node = hou.node('.')" ]
+                [ "" ]
+                [ "publish = Publish.Publish(node)" ]
+                [ "" ]
+                [ "path = os.path.join(publish.root," ]
+                [ "                    publish.project," ]
+                [ "                    publish.entity_type," ]
+                [ "                    publish.entity_subtype)" ]
+                [ "                    " ]
+                [ "return utils.menuFromDir(path)" ]
+                language python
+            }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "export_disable" "1" }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm5"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "task_name"
+            label   "Task Name"
+            type    string
+            default { "modeling_main" }
+            menureplace {
+                "layout_main"               "layout_main"
+                "animation_main"            "animation_main"
+                "animation_blocking"        "animation_blocking"
+                "animation_polish"          "animation_polish"
+                "fx_main"                   "fx_main"
+                "fx_extrafx"                "fx_extrafx"
+                "finallayout_main"          "finallayout_main"
+                "finallayout_environment"   "finallayout_environment"
+                "finallayout_setdress"      "finallayout_setdress"
+                "modeling_main"             "modeling_main"
+                "surfacing_main"            "surfacing_main"
+            }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm3"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "publish_name"
+            label   "Publish Name"
+            type    string
+            default { "main_cache" }
+            menureplace {
+                [ "from plouf import utils, Publish" ]
+                [ "import os" ]
+                [ "" ]
+                [ "node = hou.node('.')" ]
+                [ "" ]
+                [ "publish = Publish.Publish(node)" ]
+                [ "" ]
+                [ "path = os.path.join(publish.root," ]
+                [ "                    publish.project," ]
+                [ "                    publish.entity_type," ]
+                [ "                    publish.entity_subtype," ]
+                [ "                    publish.entity_name," ]
+                [ "                    publish.task_name," ]
+                [ "                    'publish'," ]
+                [ "                    'v000'," ]
+                [ "                    publish.file_ext)" ]
+                [ "                    " ]
+                [ "return utils.menuFromDir(path)" ]
+                language python
+            }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "check_dependencies"
+            label   "Check Dependencies"
+            type    button
+            invisible
+            default { "0" }
+            parmtag { "script_callback" "hou.phm().cb_depcheck(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "dependencies_info"
+            label   "Unpublished Dependencies"
+            type    string
+            invisible
+            default { "" }
+            parmtag { "editor" "1" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "usd_name"
+            label   "USD Component Name"
+            type    string
+            default { "vdb_cache" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm10"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+    }
+
+}

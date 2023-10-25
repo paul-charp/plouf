@@ -1,0 +1,27 @@
+from plouf import callbacks, utils, Publish, PublishCache
+import nodegraphtopui
+
+def cancel_cook(kwargs):
+    topnode = kwargs.get('node').parm('targettopnetwork').evalAsNode()
+    nodegraphtopui.dirtyAll(topnode, False)
+    cb_path(kwargs)
+
+def cb_publish(kwargs):
+    topnode = kwargs.get('node').parm('targettopnetwork').evalAsNode()
+    nodegraphtopui.dirtyAll(topnode, False)
+    nodegraphtopui.cookOutputNode(topnode)
+    
+    publish = Publish.Publish(kwargs.get('node'))
+    publish.publishHipFile()
+    cb_path(kwargs)
+
+    
+def cb_path(kwargs):
+    callbacks.cb_publish_cache_pathUpdate(kwargs)
+    
+    
+def explore(kwargs):
+    node = kwargs.get('node')
+    publish = Publish.Publish(node)
+    path = publish.getPublishPath(mode='path')
+    utils.explore(path)

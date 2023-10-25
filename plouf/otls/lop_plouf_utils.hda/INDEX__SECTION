@@ -1,0 +1,70 @@
+Operator:     scene_init
+Label:        Configure Scene
+Path:         oplib:/Lop/scene_init?Lop/scene_init
+Icon:         LOP_sceneimport
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       0 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Wed Feb 15 11:56:30 2023
+
+Operator:     firemen::dev::renderlayer
+Label:        Render Layer
+Path:         oplib:/firemen::dev::Lop/renderlayer?firemen::dev::Lop/renderlayer
+Icon:         LOP_karmastandardrendervars
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       1 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Sun Apr 30 18:52:14 2023
+
+Operator:     firemen::dev::explore_asset_variants
+Label:        Explore Asset Variants (Dev)
+Path:         oplib:/firemen::dev::Lop/explore_asset_variants?firemen::dev::Lop/explore_asset_variants
+Icon:         LOP_subnet
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       0 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Thu Feb  9 16:53:43 2023
+
+Operator:     firemen::dev::explorevariants
+Label:        Explore Variants (Dev)
+Path:         oplib:/firemen::dev::Lop/explorevariants?firemen::dev::Lop/explorevariants
+Icon:         LOP_explorevariants
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       1 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Thu Feb  9 16:54:04 2023
+
+Operator:     firemen::dev::renderaov
+Label:        Render AOV
+Path:         oplib:/firemen::dev::Lop/renderaov?firemen::dev::Lop/renderaov
+Icon:         LOP_karmastandardrendervars
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       1 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Fri Apr 21 13:04:58 2023
+

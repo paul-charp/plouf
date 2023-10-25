@@ -1,0 +1,540 @@
+# Dialog script for alembic_import automatically generated
+
+{
+    name	alembic_import
+    script	publish_model_abc
+    label	"Alembic Import"
+
+    help {
+	""
+    }
+
+    inputlabel	1	"Input Stage"
+    inputlabel	2	"Input 2"
+    inputlabel	3	"Input 3"
+    inputlabel	4	"Input 4"
+
+    groupcollapsible {
+        name    "folder13"
+        label   "ABC IMPORT"
+
+        parm {
+            name    "sepparm6"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "reload"
+            label   "Reload Geometry"
+            type    button
+            default { "0" }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "fileName"
+            label   "Alembic File"
+            type    file
+            default { "" }
+            menureplace {
+                [ "opmenu -l -a import_abc/sopnet/create/import_abc fileName" ]
+            }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "filechooser_pattern" "*.abc" }
+        }
+        parm {
+            name    "sepparm4"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+    }
+
+    groupcollapsible {
+        name    "folder14"
+        label   "ASSET SETTINGS"
+
+        parm {
+            name    "sepparm8"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "assetname"
+            label   "Asset Name"
+            type    string
+            default { "asset" }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm10"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "t_name"
+            label   "Mesh Name"
+            type    toggle
+            nolabel
+            joinnext
+            default { "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "name"
+            label   "Mesh Name"
+            type    string
+            default { "mesh" }
+            disablewhen "{ t_name == 0 }"
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm9"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "t_shapes"
+            label   "Remove Shapes Path"
+            type    toggle
+            default { "1" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm7"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "polygonsassubd"
+            label   "Treat Polygons as Subdivision Surfaces"
+            type    toggle
+            default { "on" }
+            parmtag { "autoscope" "0000000000000000" }
+        }
+        parm {
+            name    "enable_subdgroup"
+            label   "Enable Subdivision Group"
+            type    toggle
+            nolabel
+            joinnext
+            default { "off" }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "subdgroup"
+            label   "Subdivision Group"
+            type    string
+            default { "*" }
+            disablewhen "{ enable_subdgroup == 0 }"
+            menutoggle {
+                [ "opmenu -l -a import_abc subdgroup" ]
+            }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "subsetgroups"
+            label   "Subset Groups"
+            type    string
+            default { "*SG" }
+            menutoggle {
+                [ "opmenu -l -a import_abc subsetgroups" ]
+            }
+            parmtag { "autoscope" "0000000000000000" }
+        }
+        parm {
+            name    "scale"
+            label   "Uniform Scale"
+            type    float
+            default { "1" }
+            range   { 0 10 }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm5"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+    }
+
+    groupcollapsible {
+        name    "folder9_2"
+        label   "ABC SETTINGS"
+
+        group {
+            name    "stdswitcher5"
+            label   "Selection"
+
+            parm {
+                name    "rootPath"
+                label   "Root Path"
+                type    string
+                joinnext
+                default { "" }
+                menureplace {
+                    [ "opmenu -l -a import_abc/sopnet/create/import_abc rootPath" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "pickrootPath"
+                label   "Pick"
+                type    button
+                nolabel
+                default { "0" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "button_icon" "BUTTONS_tree" }
+            }
+            parm {
+                name    "objectPath"
+                label   "Object Path"
+                type    string
+                joinnext
+                default { "" }
+                menutoggle {
+                    [ "opmenu -l -a import_abc/sopnet/create/import_abc objectPath" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_action" "import soputils\nkwargs['objectPath'] = kwargs['node'].parmTuple('objectPath')\nkwargs['objectExclude'] = kwargs['node'].parmTuple('objectExclude')\nkwargs['clearObjectPath'] = True\nkwargs['clearObjectExclude'] = False\nsoputils.selectAlembicPaths(kwargs)" }
+                parmtag { "script_action_help" "Select Alembic objects from an available viewport." }
+                parmtag { "script_action_icon" "BUTTONS_reselect" }
+            }
+            parm {
+                name    "pickobjectPath"
+                label   "Pick"
+                type    button
+                nolabel
+                default { "0" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "button_icon" "BUTTONS_tree" }
+            }
+            parm {
+                name    "objectExclude"
+                label   "Object Exclude"
+                type    string
+                joinnext
+                default { "" }
+                menutoggle {
+                    [ "opmenu -l -a import_abc/sopnet/create/import_abc objectExclude" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_action" "import soputils\nkwargs['objectPath'] = kwargs['node'].parmTuple('objectPath')\nkwargs['objectExclude'] = kwargs['node'].parmTuple('objectExclude')\nkwargs['clearObjectPath'] = False\nkwargs['clearObjectExclude'] = True\nsoputils.selectAlembicPaths(kwargs)" }
+                parmtag { "script_action_help" "Select Alembic objects from an available viewport." }
+                parmtag { "script_action_icon" "BUTTONS_reselect" }
+            }
+            parm {
+                name    "pickobjectExclude"
+                label   "Pick"
+                type    button
+                nolabel
+                default { "0" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "button_icon" "BUTTONS_tree" }
+            }
+            parm {
+                name    "objectPattern"
+                label   "Object Pattern"
+                type    string
+                default { "*" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "animationfilter"
+                label   "Animating Objects"
+                type    ordinal
+                default { "all" }
+                menu {
+                    "all"           "Include All Primitives"
+                    "static"        "Only Static Primitives"
+                    "deforming"     "Only Deforming Primitives"
+                    "transforming"  "Only Transforming Primitives"
+                    "animating"     "Only Deforming or Transforming Primitives"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "polygonFilter"
+                label   "Load Polygons"
+                type    toggle
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "curveFilter"
+                label   "Load Curves"
+                type    toggle
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "NURBSFilter"
+                label   "Load NURBS"
+                type    toggle
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "pointsFilter"
+                label   "Load Points"
+                type    toggle
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "subdFilter"
+                label   "Load Subdivision Surfaces"
+                type    toggle
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "loadLocator"
+                label   "Load Maya Locator"
+                type    toggle
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "boxcull"
+                label   "Box Culling"
+                type    ordinal
+                default { "none" }
+                menu {
+                    "none"          "No Spatial Filtering"
+                    "inside"        "Load Objects Entirely Inside Box"
+                    "anyinside"     "Load Objects With Any Part In Box"
+                    "outside"       "Load Object Outside Box"
+                    "anyoutside"    "Load Objects With Any Part Outside Box"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "boxsource"
+                label   "Use First Input To Specify Box"
+                type    toggle
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "boxsize"
+                label   "Box Size"
+                type    vector
+                size    3
+                default { "1" "1" "1" }
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "boxcenter"
+                label   "Box Center"
+                type    vector
+                size    3
+                default { "0" "0" "0" }
+                range   { -1 1 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sizecull"
+                label   "Size Culling"
+                type    ordinal
+                default { "none" }
+                menu {
+                    "none"      "No Size Filtering"
+                    "area"      "Filter Objects By Bounding Area"
+                    "radius"    "Filter Objects By Bounding Radius"
+                    "volume"    "Filter Objects By Bounding Volume"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sizecompare"
+                label   "Size Compare"
+                type    ordinal
+                default { "greaterthan" }
+                menu {
+                    "lessthan"      "Less Than"
+                    "greaterthan"   "Greater Than"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "size"
+                label   "Size"
+                type    float
+                default { "1" }
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+        }
+
+        group {
+            name    "stdswitcher5_1"
+            label   "Attributes"
+
+            parm {
+                name    "pointAttributes"
+                label   "Point Attributes"
+                type    string
+                default { "*" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "vertexAttributes"
+                label   "Vertex Attributes"
+                type    string
+                default { "*" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "primitiveAttributes"
+                label   "Primitive Attributes"
+                type    string
+                default { "*" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "detailAttributes"
+                label   "Detail Attributes"
+                type    string
+                default { "*" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "facesetAttributes"
+                label   "Faceset Attributes"
+                type    string
+                default { "*" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "loadUserProps"
+                label   "User Properties"
+                type    ordinal
+                default { "none" }
+                menu {
+                    "none"  "Do Not Load"
+                    "data"  "Load Values Only"
+                    "both"  "Load Values and Metadata"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "addpath"
+                label   "Add Path Attribute"
+                type    toggle
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "pathattrib"
+                label   "Path Attribute"
+                type    string
+                default { "path" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "addfile"
+                label   "Add Filename Attribute"
+                type    toggle
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "fileattrib"
+                label   "Filename Attribute"
+                type    string
+                default { "abcFileName" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            multiparm {
+                name    "remapAttributes"
+                label    "Remap Attributes"
+                default 0
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "multistartoffset" "1" }
+
+                parm {
+                    name    "abcName#_4"
+                    label   "Alembic Name #"
+                    type    string
+                    default { "" }
+                }
+                parm {
+                    name    "hName#_4"
+                    label   "Houdini Name #"
+                    type    string
+                    default { "" }
+                }
+                parm {
+                    name    "typeInfo#_4"
+                    label   "Type Info"
+                    type    ordinal
+                    default { "keep" }
+                    menu {
+                        "keep"      "Keep Type Info"
+                        "clear"     "Clear Type Info"
+                        "matrix"    "Set To Matrix"
+                        "normal"    "Set To Normal"
+                        "point"     "Set To Point"
+                        "quat"      "Set To Quaternion"
+                        "rgb"       "Set To Color"
+                        "vector"    "Set To Vector"
+                    }
+                }
+            }
+
+        }
+
+    }
+
+}

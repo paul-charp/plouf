@@ -1,0 +1,8 @@
+{   
+    "hpath": "$HOUDINI_PACKAGE_PATH/plouf",
+    "env": 
+    [   
+        {"PLOUF_ROOT" : "Q:/"},
+        {"PLOUF_PROJECT" : "firemen"}
+    ]
+}

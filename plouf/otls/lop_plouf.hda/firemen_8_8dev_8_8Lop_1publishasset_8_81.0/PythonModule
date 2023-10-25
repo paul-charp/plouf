@@ -1,0 +1,23 @@
+from plouf import callbacks, utils, Publish
+
+
+def cb_publish(kwargs):
+    callbacks.cb_publish_execute(kwargs)
+    cb_path(kwargs)
+
+    
+def cb_path(kwargs):
+    callbacks.cb_publish_pathUpdate(kwargs)
+    
+    
+def explore(kwargs):
+    node = kwargs.get('node')
+    publish = Publish.Publish(node)
+    path = publish.getPublishPath(mode='path')
+    utils.explore(path)
+    
+    
+def cb_depcheck(kwargs):
+    callbacks.cb_publish_checkDependencies(kwargs)
+
+    

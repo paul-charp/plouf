@@ -1,0 +1,150 @@
+# Dialog script for importtrackabc automatically generated
+
+{
+    name	importtrackabc
+    script	import_track_abc
+    label	"Track Import"
+
+    help {
+	""
+    }
+
+    inputlabel	1	"Input Stage"
+    inputlabel	2	"Input 2"
+    inputlabel	3	"Input 3"
+    inputlabel	4	"Input 4"
+
+    groupsimple {
+        name    "folder2"
+        label   "Import Settings"
+
+        parm {
+            name    "sepparm2"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "abcfile"
+            label   "Alembic File"
+            type    geometry
+            default { "" }
+            parmtag { "filechooser_mode" "read" }
+            parmtag { "filechooser_pattern" "*.abc" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "camsrc"
+            label   "Camera To Import"
+            type    string
+            default { "shotcam" }
+            menureplace {
+                [ "node = hou.node('./filter_cameras')" ]
+                [ "" ]
+                [ "print(node)" ]
+                [ "" ]
+                [ "stage = node.editableStage()" ]
+                [ "" ]
+                [ "ls = hou.LopSelectionRule()" ]
+                [ "ls.setPathPattern('/Cameras/*')" ]
+                [ "" ]
+                [ "paths = ls.expandedPaths(node.inputs()[0])" ]
+                [ "" ]
+                [ "menuitems = []" ]
+                [ "" ]
+                [ "for p in paths:  " ]
+                [ "    camprim = str(p).split('/')[-1]" ]
+                [ "    menuitems.append(camprim)" ]
+                [ "    menuitems.append(camprim)" ]
+                [ "" ]
+                [ "menuitems.sort()" ]
+                [ "return menuitems" ]
+                language python
+            }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "t_trackGeo"
+            label   "Import Track Geo"
+            type    toggle
+            default { "1" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+    }
+
+    groupsimple {
+        name    "folder3"
+        label   "Stage Settings"
+
+        parm {
+            name    "sepparm3"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "camname"
+            label   "Rename Camera"
+            type    string
+            default { "shotcam" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "primpattern"
+            label   "Camera Path"
+            type    string
+            default { "/scene/cameras" }
+            help    "None"
+            hidewhen "{ createprims == on }"
+            menutoggle {
+                [ "import loputils" ]
+                [ "return loputils.createPrimPatternMenu(kwargs['node'], 0)" ]
+                language python
+            }
+            parmtag { "script_action" "import loputils\nloputils.selectPrimsInParm(kwargs, True)" }
+            parmtag { "script_action_help" "Select primitives in the Scene Viewer or Scene Graph Tree pane. Ctrl-click to select using the primitive picker dialog." }
+            parmtag { "script_action_icon" "BUTTONS_reselect" }
+            parmtag { "sidefx::usdpathtype" "primlist" }
+            parmtag { "spare_category" "USD Prims" }
+        }
+        parm {
+            name    "primpattern2"
+            label   "Track Geo Path"
+            type    string
+            default { "/scene/trackgeo" }
+            help    "None"
+            hidewhen "{ createprims == on }"
+            menutoggle {
+                [ "import loputils" ]
+                [ "return loputils.createPrimPatternMenu(kwargs['node'], 0)" ]
+                language python
+            }
+            parmtag { "script_action" "import loputils\nloputils.selectPrimsInParm(kwargs, True)" }
+            parmtag { "script_action_help" "Select primitives in the Scene Viewer or Scene Graph Tree pane. Ctrl-click to select using the primitive picker dialog." }
+            parmtag { "script_action_icon" "BUTTONS_reselect" }
+            parmtag { "sidefx::usdpathtype" "primlist" }
+            parmtag { "spare_category" "USD Prims" }
+        }
+        parm {
+            name    "sepparm4"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+    }
+
+}

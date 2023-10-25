@@ -1,0 +1,16 @@
+from plouf import callbacks, utils, Publish
+import nodegraphtopui
+
+    
+def cb_path(kwargs):
+    node = kwargs.get('node')
+    publish = Publish.Publish(node)
+    path = publish.getPublishPath()
+    node.parm('publish_path_info').set(path)
+    
+    
+def explore(kwargs):
+    node = kwargs.get('node')
+    publish = Publish.Publish(node)
+    path = publish.getPublishPath(mode='path')
+    utils.explore(path)

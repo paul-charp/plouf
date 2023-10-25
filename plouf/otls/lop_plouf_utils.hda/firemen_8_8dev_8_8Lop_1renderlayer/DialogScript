@@ -1,0 +1,855 @@
+# Dialog script for firemen::dev::renderlayer automatically generated
+
+{
+    name	firemen::dev::renderlayer
+    script	firemen::dev::renderlayer
+    label	"Render Layer"
+
+    help {
+	""
+    }
+
+    inputlabel	1	"Input Stage"
+    inputlabel	2	"Input 2"
+    inputlabel	3	"Input 3"
+    inputlabel	4	"Input 4"
+
+    parm {
+        name    "entity_type"
+        label   "entity_type"
+        type    string
+        invisible
+        nolabel
+        joinnext
+        default { "shots" }
+        parmtag { "script_callback" "" }
+        parmtag { "script_callback_language" "python" }
+    }
+    parm {
+        name    "history_version"
+        label   "version"
+        type    string
+        invisible
+        nolabel
+        default { "v000" }
+        parmtag { "autoscope" "0000000000000000" }
+        parmtag { "script_callback_language" "python" }
+    }
+    parm {
+        name    "publish_name"
+        label   "Publish Name"
+        type    string
+        invisible
+        default { "render_`chs(\"layer_name\")`" }
+        menureplace {
+            [ "from plouf import utils, Publish" ]
+            [ "import os" ]
+            [ "" ]
+            [ "node = hou.node('.')" ]
+            [ "" ]
+            [ "publish = Publish.Publish(node)" ]
+            [ "" ]
+            [ "path = os.path.join(publish.root," ]
+            [ "                    publish.project," ]
+            [ "                    publish.entity_type," ]
+            [ "                    publish.entity_subtype," ]
+            [ "                    publish.entity_name," ]
+            [ "                    publish.task_name," ]
+            [ "                    'publish'," ]
+            [ "                    'v000'," ]
+            [ "                    publish.file_ext)" ]
+            [ "                    " ]
+            [ "return utils.menuFromDir(path)" ]
+            language python
+        }
+        parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+        parmtag { "script_callback_language" "python" }
+    }
+    parm {
+        name    "sepparm9"
+        label   "Spacer"
+        type    separator
+        default { "" }
+        parmtag { "sidefx::layout_height" "medium" }
+        parmtag { "sidefx::look" "blank" }
+    }
+    parm {
+        name    "layer_name"
+        label   "Render Layer Name"
+        type    string
+        default { "main" }
+        parmtag { "script_callback" "" }
+        parmtag { "script_callback_language" "python" }
+    }
+    parm {
+        name    "rendersettings"
+        label   "Master Render Settings"
+        type    string
+        default { "/Render/rendersettings" }
+        help    "None"
+        hidewhen "{ createprims == on }"
+        menutoggle {
+            [ "import loputils" ]
+            [ "return loputils.createPrimPatternMenu(kwargs['node'], 0)" ]
+            language python
+        }
+        parmtag { "script_action" "import loputils\nloputils.selectPrimsInParm(kwargs, True)" }
+        parmtag { "script_action_help" "Select primitives in the Scene Viewer or Scene Graph Tree pane. Ctrl-click to select using the primitive picker dialog." }
+        parmtag { "script_action_icon" "BUTTONS_reselect" }
+        parmtag { "sidefx::usdpathtype" "primlist" }
+        parmtag { "spare_category" "USD Prims" }
+    }
+    parm {
+        name    "sepparm12"
+        label   "Spacer"
+        type    separator
+        default { "" }
+        parmtag { "sidefx::layout_height" "small" }
+        parmtag { "sidefx::look" "blank" }
+    }
+    parm {
+        name    "labelparm2"
+        label   "labelparm2"
+        type    label
+        default { "Render Version (Do not abuse of it please)" }
+        parmtag { "sidefx::look" "block" }
+    }
+    parm {
+        name    "version"
+        label   " "
+        type    integer
+        default { "0" }
+        range   { 0 10 }
+        parmtag { "script_callback_language" "python" }
+    }
+    parm {
+        name    "sepparm8"
+        label   "Spacer"
+        type    separator
+        default { "" }
+        parmtag { "sidefx::layout_height" "medium" }
+        parmtag { "sidefx::look" "blank" }
+    }
+    group {
+        name    "folder0"
+        label   "Publish Settings"
+
+        parm {
+            name    "sepparm7"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "trange"
+            label   "Valid Frame Range"
+            type    ordinal
+            default { "normal" }
+            menu usetokenvalue {
+                "off"       "Render One Frame"
+                "normal"    "Render Frame Range"
+            }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "fs"
+            label   "Frame"
+            type    integer
+            default { "1001" }
+            hidewhen "{ trange == 1 }"
+            range   { 1001 1240 }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "f"
+            label   "Start/End"
+            type    integer
+            size    2
+            default { [ "$FSTART" hscript-expr ] "$FEND" }
+            hidewhen "{ trange == 0 }"
+            range   { 0 10 }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm6"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "entity_subtype"
+            label   "Sequence"
+            type    string
+            default { "s00" }
+            menureplace {
+                [ "from plouf import utils, Publish" ]
+                [ "import os" ]
+                [ "" ]
+                [ "node = hou.node('.')" ]
+                [ "" ]
+                [ "publish = Publish.Publish(node)" ]
+                [ "" ]
+                [ "path = os.path.join(publish.root," ]
+                [ "                    publish.project," ]
+                [ "                    publish.entity_type)" ]
+                [ "                    " ]
+                [ "return utils.menuFromDir(path)" ]
+                language python
+            }
+            parmtag { "editor" "0" }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm4"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "entity_name"
+            label   "Shot"
+            type    string
+            default { "p010" }
+            menureplace {
+                [ "from plouf import utils, Publish" ]
+                [ "import os" ]
+                [ "" ]
+                [ "node = hou.node('.')" ]
+                [ "" ]
+                [ "publish = Publish.Publish(node)" ]
+                [ "" ]
+                [ "path = os.path.join(publish.root," ]
+                [ "                    publish.project," ]
+                [ "                    publish.entity_type," ]
+                [ "                    publish.entity_subtype)" ]
+                [ "                    " ]
+                [ "return utils.menuFromDir(path)" ]
+                language python
+            }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "export_disable" "1" }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm5"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "task_name"
+            label   "Task Name"
+            type    string
+            default { "lighting_main" }
+            menureplace {
+                "layout_main"               "layout_main"
+                "animation_main"            "animation_main"
+                "animation_blocking"        "animation_blocking"
+                "animation_polish"          "animation_polish"
+                "fx_main"                   "fx_main"
+                "fx_extrafx"                "fx_extrafx"
+                "finallayout_main"          "finallayout_main"
+                "finallayout_environment"   "finallayout_environment"
+                "finallayout_setdress"      "finallayout_setdress"
+                "lighting_main"             "lighting_main"
+            }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm3"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+    }
+
+    group {
+        name    "folder0_1"
+        label   "Contribution"
+
+        parm {
+            name    "sepparm11"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "visible"
+            label   "Visible"
+            type    string
+            default { "" }
+            help    "None"
+            hidewhen "{ createprims == on }"
+            menutoggle {
+                [ "import loputils" ]
+                [ "return loputils.createPrimPatternMenu(kwargs['node'], 0)" ]
+                language python
+            }
+            parmtag { "script_action" "import loputils\nloputils.selectPrimsInParm(kwargs, True)" }
+            parmtag { "script_action_help" "Select primitives in the Scene Viewer or Scene Graph Tree pane. Ctrl-click to select using the primitive picker dialog." }
+            parmtag { "script_action_icon" "BUTTONS_reselect" }
+            parmtag { "sidefx::usdpathtype" "primlist" }
+            parmtag { "spare_category" "USD Prims" }
+        }
+        parm {
+            name    "matte"
+            label   "Matte"
+            type    string
+            default { "" }
+            help    "None"
+            disablewhen "{ t_crypto == 1 }"
+            menutoggle {
+                [ "import loputils" ]
+                [ "return loputils.createPrimPatternMenu(kwargs['node'], 0)" ]
+                language python
+            }
+            parmtag { "script_action" "import loputils\nloputils.selectPrimsInParm(kwargs, True)" }
+            parmtag { "script_action_help" "Select primitives in the Scene Viewer or Scene Graph Tree pane. Ctrl-click to select using the primitive picker dialog." }
+            parmtag { "script_action_icon" "BUTTONS_reselect" }
+            parmtag { "sidefx::usdpathtype" "primlist" }
+            parmtag { "spare_category" "USD Prims" }
+        }
+        parm {
+            name    "phantom"
+            label   "Phantom"
+            type    string
+            default { "" }
+            help    "None"
+            disablewhen "{ t_crypto == 1 }"
+            menutoggle {
+                [ "import loputils" ]
+                [ "return loputils.createPrimPatternMenu(kwargs['node'], 0)" ]
+                language python
+            }
+            parmtag { "script_action" "import loputils\nloputils.selectPrimsInParm(kwargs, True)" }
+            parmtag { "script_action_help" "Select primitives in the Scene Viewer or Scene Graph Tree pane. Ctrl-click to select using the primitive picker dialog." }
+            parmtag { "script_action_icon" "BUTTONS_reselect" }
+            parmtag { "sidefx::usdpathtype" "primlist" }
+            parmtag { "spare_category" "USD Prims" }
+        }
+        parm {
+            name    "sepparm10"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "exclude"
+            label   "Force Exclude"
+            type    string
+            default { "" }
+            help    "None"
+            hidewhen "{ createprims == on }"
+            menutoggle {
+                [ "import loputils" ]
+                [ "return loputils.createPrimPatternMenu(kwargs['node'], 0)" ]
+                language python
+            }
+            parmtag { "script_action" "import loputils\nloputils.selectPrimsInParm(kwargs, True)" }
+            parmtag { "script_action_help" "Select primitives in the Scene Viewer or Scene Graph Tree pane. Ctrl-click to select using the primitive picker dialog." }
+            parmtag { "script_action_icon" "BUTTONS_reselect" }
+            parmtag { "sidefx::usdpathtype" "primlist" }
+            parmtag { "spare_category" "USD Prims" }
+        }
+    }
+
+    group {
+        name    "folder0_2"
+        label   "Cryptomattes"
+
+        parm {
+            name    "t_crypto"
+            label   "Enable Cryptomattes"
+            type    toggle
+            default { "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        groupcollapsible {
+            name    "folder3"
+            label   "Cryptomatte IDs"
+            disablewhen "{ t_crypto == 0 }"
+            parmtag { "group_default" "1" }
+            grouptag { "group_default:0" "1" }
+            grouptag { "group_typedoprimcrypto" "collapsible" }
+            parmtag { "sidefx::header_toggle" "t_crypto" }
+            grouptag { "visibletabs" "1" }
+
+            parm {
+                name    "doprimcrypto"
+                label   "Enable"
+                type    toggle
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            groupcollapsible {
+                name    "folder2"
+                label   "Primitives"
+                disablewhen "{ doprimcrypto != 1 }"
+                parmtag { "group_default" "0" }
+                grouptag { "group_default:0" "0" }
+                grouptag { "group_type" "collapsible" }
+                parmtag { "sidefx::header_parm" "primcryptoname" }
+                grouptag { "sidefx::header_parm:0" "primcryptoname" }
+                parmtag { "sidefx::header_toggle" "doprimcrypto" }
+                grouptag { "sidefx::header_toggle:0" "doprimcrypto" }
+                grouptag { "visibletabs" "1" }
+
+                parm {
+                    name    "primcryptoname"
+                    label   "Name"
+                    type    string
+                    default { "CryptoPrimitives" }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "script_callback_language" "python" }
+                }
+                groupcollapsible {
+                    name    "folder4"
+                    label   "Render Options"
+                    parmtag { "group_default" "0" }
+                    grouptag { "group_default:0" "0" }
+                    grouptag { "group_type" "collapsible" }
+                    grouptag { "visibletabs" "1" }
+
+                    parm {
+                        name    "primcryptopixelfilter"
+                        label   "Pixel Filter"
+                        type    string
+                        default { "[\"ubox\",{}]" }
+                        menureplace {
+                            "[\"ubox\",{}]"                         "Average Sample Values"
+                            "[\"accumulate\",{}]"                   "Adds Up Sample Values"
+                            "[\"minmax\",{\"mode\":\"min\"}]"       "Sample: Minimum Value"
+                            "[\"minmax\",{\"mode\":\"max\"}]"       "Sample: Maximum Value"
+                            "[\"minmax\",{\"mode\":\"median\"}]"    "Sample: Median Value"
+                            "[\"minmax\",{\"mode\":\"zmin\"}]"      "Sample: Closest"
+                            "[\"minmax\",{\"mode\":\"zmax\"}]"      "Sample: Farthest"
+                            "[\"minmax\",{\"mode\":\"edge\"}]"      "Disable Edge Antialiasing"
+                            "[\"minmax\",{\"mode\":\"ocover\"}]"    "Object With Most Pixel Coverage (average)"
+                            "[\"minmax\",{\"mode\":\"idcover\"}]"   "Object With Most Coverage (no filtering)"
+                            "[\"minmax\",{\"mode\":\"omin\"}]"      "Object With Most Coverage (minimum z-value)"
+                            "[\"minmax\",{\"mode\":\"omax\"}]"      "Object With Most Coverage (maximum z-value)"
+                            "[\"minmax\",{\"mode\":\"omedian\"}]"   "Object With Most Coverage (median z-value)"
+                        }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "spare_category" "Image" }
+                        parmtag { "uiscope" "None" }
+                        parmtag { "usdvaluetype" "string" }
+                    }
+                    parm {
+                        name    "primcryptomaxoverlap"
+                        label   "Max Overlap"
+                        type    integer
+                        default { "6" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "primcryptomultisampled"
+                        label   "Multi Sampled"
+                        type    toggle
+                        default { "off" }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "primcryptosidecar"
+                        label   "Sidecar File"
+                        type    file
+                        default { "" }
+                        menureplace {
+                            [ "opmenu -l -a karmacryptomatte1 primcryptosidecar" ]
+                        }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "filechooser_pattern" "*.json" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                }
+
+                parm {
+                    name    "sepparm"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+            }
+
+            parm {
+                name    "domtlcrypto"
+                label   "Enable"
+                type    toggle
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            groupcollapsible {
+                name    "folder5"
+                label   "Materials"
+                disablewhen "{ domtlcrypto != 1 }"
+                parmtag { "group_default" "0" }
+                grouptag { "group_default:0" "0" }
+                grouptag { "group_type" "collapsible" }
+                parmtag { "sidefx::header_parm" "mtlcryptoname" }
+                grouptag { "sidefx::header_parm:0" "mtlcryptoname" }
+                parmtag { "sidefx::header_toggle" "domtlcrypto" }
+                grouptag { "sidefx::header_toggle:0" "domtlcrypto" }
+                grouptag { "visibletabs" "1" }
+
+                parm {
+                    name    "mtlcryptoname"
+                    label   "Name"
+                    type    string
+                    default { "CryptoMaterials" }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "script_callback_language" "python" }
+                }
+                groupcollapsible {
+                    name    "folder9"
+                    label   "Render Options"
+                    parmtag { "group_default" "0" }
+                    grouptag { "group_default:0" "0" }
+                    grouptag { "group_type" "collapsible" }
+                    grouptag { "visibletabs" "1" }
+
+                    parm {
+                        name    "mtlcryptopixelfilter"
+                        label   "Pixel Filter"
+                        type    string
+                        default { "[\"ubox\",{}]" }
+                        menureplace {
+                            "[\"ubox\",{}]"                         "Average Sample Values"
+                            "[\"accumulate\",{}]"                   "Adds Up Sample Values"
+                            "[\"minmax\",{\"mode\":\"min\"}]"       "Sample: Minimum Value"
+                            "[\"minmax\",{\"mode\":\"max\"}]"       "Sample: Maximum Value"
+                            "[\"minmax\",{\"mode\":\"median\"}]"    "Sample: Median Value"
+                            "[\"minmax\",{\"mode\":\"zmin\"}]"      "Sample: Closest"
+                            "[\"minmax\",{\"mode\":\"zmax\"}]"      "Sample: Farthest"
+                            "[\"minmax\",{\"mode\":\"edge\"}]"      "Disable Edge Antialiasing"
+                            "[\"minmax\",{\"mode\":\"ocover\"}]"    "Object With Most Pixel Coverage (average)"
+                            "[\"minmax\",{\"mode\":\"idcover\"}]"   "Object With Most Coverage (no filtering)"
+                            "[\"minmax\",{\"mode\":\"omin\"}]"      "Object With Most Coverage (minimum z-value)"
+                            "[\"minmax\",{\"mode\":\"omax\"}]"      "Object With Most Coverage (maximum z-value)"
+                            "[\"minmax\",{\"mode\":\"omedian\"}]"   "Object With Most Coverage (median z-value)"
+                        }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "spare_category" "Image" }
+                        parmtag { "uiscope" "None" }
+                        parmtag { "usdvaluetype" "string" }
+                    }
+                    parm {
+                        name    "mtlcryptomaxoverlap"
+                        label   "Max Overlap"
+                        type    integer
+                        default { "6" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "mtlcryptomultisampled"
+                        label   "Multi Sampled"
+                        type    toggle
+                        default { "off" }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "mtlcryptosidecar"
+                        label   "Sidecar File"
+                        type    file
+                        default { "" }
+                        menureplace {
+                            [ "opmenu -l -a karmacryptomatte1 mtlcryptosidecar" ]
+                        }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "filechooser_pattern" "*.json" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                }
+
+                parm {
+                    name    "sepparm2"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+            }
+
+            parm {
+                name    "dokindcrypto"
+                label   "Enable"
+                type    toggle
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            groupcollapsible {
+                name    "folder6"
+                label   "Kind"
+                disablewhen "{ dokindcrypto != 1 }"
+                parmtag { "group_default" "0" }
+                grouptag { "group_default:0" "0" }
+                grouptag { "group_type" "collapsible" }
+                parmtag { "sidefx::header_toggle" "dokindcrypto" }
+                grouptag { "sidefx::header_toggle:0" "dokindcrypto" }
+                grouptag { "visibletabs" "1" }
+
+                multiparm {
+                    name    "kinds_folder"
+                    label    "Vars"
+                    default 1
+                    parmtag { "autoscope" "0000000000000000" }
+
+                    parm {
+                        name    "kindcrypto#"
+                        label   "Kind"
+                        type    string
+                        default { "component" }
+                        menu {
+                            [ "menu = []#['component','Component']" ]
+                            [ "mpidx = kwargs['script_multiparm_index']" ]
+                            [ "models = kwargs['node'].evalParm('kindcryptostrict{}'.format(mpidx))" ]
+                            [ "" ]
+                            [ "from pxr import Kind" ]
+                            [ "" ]
+                            [ "kind_registry = Kind.Registry" ]
+                            [ "m = Kind.Tokens.model" ]
+                            [ "" ]
+                            [ "for kind in kind_registry.GetAllKinds():" ]
+                            [ "    if kind != m:" ]
+                            [ "        if models and kind_registry.IsA(kind,m):" ]
+                            [ "            menu.append(kind)" ]
+                            [ "            menu.append(kind.capitalize())" ]
+                            [ "        else:" ]
+                            [ "            menu.append(kind)" ]
+                            [ "            menu.append(kind.capitalize())" ]
+                            [ "" ]
+                            [ "return menu" ]
+                            language python
+                        }
+                        range   { 0 10 }
+                        parmtag { "script_callback_language" "python" }
+                        parmtag { "units" "" }
+                    }
+                    parm {
+                        name    "kindcryptomatchby#"
+                        label   "Match By"
+                        type    integer
+                        default { "0" }
+                        menu {
+                            "0" "Prim Path"
+                            "1" "AssetInfo"
+                        }
+                        range   { 0 10 }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "kindcryptostrict#"
+                        label   "Strict Model Hierarchy"
+                        type    toggle
+                        default { "0" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "kindcryptoname#"
+                        label   "Name"
+                        type    string
+                        default { "CryptoKind_`chs(\"kindcrypto\"+opdigits($CH))`" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    groupcollapsible {
+                        name    "folder10_#"
+                        label   "Render Options"
+                        parmtag { "group_default" "0" }
+
+                        parm {
+                            name    "kindcryptopixelfilter#"
+                            label   "Pixel Filter"
+                            type    string
+                            default { "[\"ubox\",{}]" }
+                            menureplace {
+                                "[\"ubox\",{}]"                         "Average Sample Values"
+                                "[\"accumulate\",{}]"                   "Adds Up Sample Values"
+                                "[\"minmax\",{\"mode\":\"min\"}]"       "Sample: Minimum Value"
+                                "[\"minmax\",{\"mode\":\"max\"}]"       "Sample: Maximum Value"
+                                "[\"minmax\",{\"mode\":\"median\"}]"    "Sample: Median Value"
+                                "[\"minmax\",{\"mode\":\"zmin\"}]"      "Sample: Closest"
+                                "[\"minmax\",{\"mode\":\"zmax\"}]"      "Sample: Farthest"
+                                "[\"minmax\",{\"mode\":\"edge\"}]"      "Disable Edge Antialiasing"
+                                "[\"minmax\",{\"mode\":\"ocover\"}]"    "Object With Most Pixel Coverage (average)"
+                                "[\"minmax\",{\"mode\":\"idcover\"}]"   "Object With Most Coverage (no filtering)"
+                                "[\"minmax\",{\"mode\":\"omin\"}]"      "Object With Most Coverage (minimum z-value)"
+                                "[\"minmax\",{\"mode\":\"omax\"}]"      "Object With Most Coverage (maximum z-value)"
+                                "[\"minmax\",{\"mode\":\"omedian\"}]"   "Object With Most Coverage (median z-value)"
+                            }
+                            parmtag { "autoscope" "0000000000000000" }
+                            parmtag { "spare_category" "Image" }
+                            parmtag { "uiscope" "None" }
+                            parmtag { "usdvaluetype" "string" }
+                        }
+                        parm {
+                            name    "kindcryptomaxoverlap#"
+                            label   "Max Overlap"
+                            type    integer
+                            default { "6" }
+                            range   { 0 10 }
+                            parmtag { "script_callback_language" "python" }
+                        }
+                        parm {
+                            name    "kindcryptomultisampled#"
+                            label   "Multi Sampled"
+                            type    toggle
+                            default { "0" }
+                            parmtag { "script_callback_language" "python" }
+                        }
+                        parm {
+                            name    "kindcryptosidecar#"
+                            label   "Sidecar File"
+                            type    file
+                            default { "" }
+                            parmtag { "filechooser_pattern" "*.json" }
+                            parmtag { "script_callback_language" "python" }
+                        }
+                    }
+
+                    parm {
+                        name    "_sepparm4_#"
+                        label   "Spacer"
+                        type    separator
+                        default { "" }
+                        parmtag { "sidefx::layout_height" "small" }
+                        parmtag { "sidefx::look" "blank" }
+                    }
+                }
+
+            }
+
+            parm {
+                name    "doprimvarcrypto"
+                label   "Enable"
+                type    toggle
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            groupcollapsible {
+                name    "folder7"
+                label   "Primvar"
+                disablewhen "{ doprimvarcrypto != 1 }"
+                parmtag { "group_default" "0" }
+                grouptag { "group_default:0" "0" }
+                grouptag { "group_type" "collapsible" }
+                parmtag { "sidefx::header_toggle" "doprimvarcrypto" }
+                grouptag { "sidefx::header_toggle:0" "doprimvarcrypto" }
+                grouptag { "visibletabs" "1" }
+
+                multiparm {
+                    name    "primvars_folder"
+                    label    "Primvar IDs"
+                    default 1
+                    parmtag { "autoscope" "0000000000000000" }
+
+                    parm {
+                        name    "primvarcrypto#"
+                        label   "Primvar (String/Int)"
+                        type    string
+                        default { "" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "primvarcryptoname#"
+                        label   "Name"
+                        type    string
+                        default { "CryptoPrimvar_`chs(\"primvarcrypto\"+opdigits($CH))`" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    groupcollapsible {
+                        name    "folder10_#_2"
+                        label   "Render Options"
+                        parmtag { "group_default" "0" }
+
+                        parm {
+                            name    "primvarcryptopixelfilter#"
+                            label   "Pixel Filter"
+                            type    string
+                            default { "[\"ubox\",{}]" }
+                            menureplace {
+                                "[\"ubox\",{}]"                         "Average Sample Values"
+                                "[\"accumulate\",{}]"                   "Adds Up Sample Values"
+                                "[\"minmax\",{\"mode\":\"min\"}]"       "Sample: Minimum Value"
+                                "[\"minmax\",{\"mode\":\"max\"}]"       "Sample: Maximum Value"
+                                "[\"minmax\",{\"mode\":\"median\"}]"    "Sample: Median Value"
+                                "[\"minmax\",{\"mode\":\"zmin\"}]"      "Sample: Closest"
+                                "[\"minmax\",{\"mode\":\"zmax\"}]"      "Sample: Farthest"
+                                "[\"minmax\",{\"mode\":\"edge\"}]"      "Disable Edge Antialiasing"
+                                "[\"minmax\",{\"mode\":\"ocover\"}]"    "Object With Most Pixel Coverage (average)"
+                                "[\"minmax\",{\"mode\":\"idcover\"}]"   "Object With Most Coverage (no filtering)"
+                                "[\"minmax\",{\"mode\":\"omin\"}]"      "Object With Most Coverage (minimum z-value)"
+                                "[\"minmax\",{\"mode\":\"omax\"}]"      "Object With Most Coverage (maximum z-value)"
+                                "[\"minmax\",{\"mode\":\"omedian\"}]"   "Object With Most Coverage (median z-value)"
+                            }
+                            parmtag { "autoscope" "0000000000000000" }
+                            parmtag { "spare_category" "Image" }
+                            parmtag { "uiscope" "None" }
+                            parmtag { "usdvaluetype" "string" }
+                        }
+                        parm {
+                            name    "primvarcryptomaxoverlap#"
+                            label   "Max Overlap"
+                            type    integer
+                            default { "6" }
+                            range   { 0 10 }
+                            parmtag { "script_callback_language" "python" }
+                        }
+                        parm {
+                            name    "primvarcryptomultisampled#"
+                            label   "Multi Sampled"
+                            type    toggle
+                            default { "0" }
+                            parmtag { "script_callback_language" "python" }
+                        }
+                        parm {
+                            name    "primvarcryptosidecar#"
+                            label   "Sidecar File"
+                            type    file
+                            default { "" }
+                            parmtag { "filechooser_pattern" "*.json" }
+                            parmtag { "script_callback_language" "python" }
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}

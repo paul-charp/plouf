@@ -1,0 +1,8 @@
+from pxr import Sdf
+
+def setRange(kwargs):
+    start = kwargs['node'].parm('frangemin').eval()
+    end = kwargs['node'].parm('frangemax').eval()
+    
+    hou.playbar.setFrameRange(start, end)
+    print(start, end)

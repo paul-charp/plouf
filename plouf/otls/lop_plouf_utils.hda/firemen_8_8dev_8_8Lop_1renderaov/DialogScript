@@ -1,0 +1,2299 @@
+# Dialog script for firemen::dev::renderaov automatically generated
+
+{
+    name	firemen::dev::renderaov
+    script	firemen::dev::renderaov
+    label	"Render AOV"
+
+    help {
+	""
+    }
+
+    inputlabel	1	"Input Stage"
+    inputlabel	2	"Input 2"
+    inputlabel	3	"Input 3"
+    inputlabel	4	"Input 4"
+
+    group {
+        name    "folder0"
+        label   "Karma Std AOVs"
+
+        parm {
+            name    "lpeaovlimit"
+            label   "LPE Tag AOV Limit"
+            type    integer
+            default { "100" }
+            disablewhen "{ beautyperlpe == 0 beautyunshadowedperlpe == 0 combineddiffuseperlpe == 0 directdiffuseperlpe == 0 indirectdiffuseperlpe == 0 combineddiffuseunshadowedperlpe == 0 directdiffuseunshadowedperlpe == 0 indirectdiffuseunshadowedperlpe == 0 combinedglossyreflectionperlpe == 0 directglossyreflectionperlpe == 0 indirectglossyreflectionperlpe == 0 glossytransmissionperlpe == 0 visiblelightsperlpe == 0 combinedvolumeperlpe == 0 directvolumeperlpe == 0 indirectvolumeperlpe == 0 coatperlpe == 0 sssperlpe == 0 }"
+            range   { 0 1000 }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "doomitlpes"
+            label   "Omit LPE Tags"
+            type    toggle
+            nolabel
+            joinnext
+            default { "off" }
+            disablewhen "{ beautyperlpe == 0 beautyunshadowedperlpe == 0 combineddiffuseperlpe == 0 directdiffuseperlpe == 0 indirectdiffuseperlpe == 0 combineddiffuseunshadowedperlpe == 0 directdiffuseunshadowedperlpe == 0 indirectdiffuseunshadowedperlpe == 0 combinedglossyreflectionperlpe == 0 directglossyreflectionperlpe == 0 indirectglossyreflectionperlpe == 0 glossytransmissionperlpe == 0 visiblelightsperlpe == 0 combinedvolumeperlpe == 0 directvolumeperlpe == 0 indirectvolumeperlpe == 0 coatperlpe == 0 sssperlpe == 0 }"
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "omitlpes"
+            label   "Omit LPE Tags"
+            type    string
+            default { "Untagged_Lights" }
+            disablewhen "{ doomitlpes == 0 } { beautyperlpe == 0 beautyunshadowedperlpe == 0 combineddiffuseperlpe == 0 directdiffuseperlpe == 0 indirectdiffuseperlpe == 0 combineddiffuseunshadowedperlpe == 0 directdiffuseunshadowedperlpe == 0 indirectdiffuseunshadowedperlpe == 0 combinedglossyreflectionperlpe == 0 directglossyreflectionperlpe == 0 indirectglossyreflectionperlpe == 0 glossytransmissionperlpe == 0 visiblelightsperlpe == 0 combinedvolumeperlpe == 0 directvolumeperlpe == 0 indirectvolumeperlpe == 0 coatperlpe == 0 sssperlpe == 0 }"
+            menutoggle {
+                [ "opmenu -l -a karmastandardrendervars1 omitlpes" ]
+            }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        groupcollapsible {
+            name    "folder2"
+            label   "Component Level Outputs"
+            grouptag { "group_type" "collapsible" }
+            grouptag { "visibletabs" "1" }
+
+            parm {
+                name    "beauty"
+                label   "Beauty"
+                type    toggle
+                nolabel
+                joinnext
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "beautyfilter"
+                label   "Beauty"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ beauty == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 beautyfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "beautyprecision"
+                label   "Precision"
+                type    string
+                default { "color4h" }
+                disablewhen "{ beauty == 0 }"
+                menu {
+                    "color4h"   "16 Bit"
+                    "color4f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "beautyperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ beauty == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "beautyunshadowed"
+                label   "Beauty Unshadowed"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "beautyunshadowedfilter"
+                label   "Beauty Unshadowed"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ beautyunshadowed == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 beautyunshadowedfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "beautyunshadowedprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ beautyunshadowed == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "beautyunshadowedperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ beautyunshadowed == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm2"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "combineddiffuse"
+                label   "Combined Diffuse"
+                type    toggle
+                nolabel
+                joinnext
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "combineddiffusefilter"
+                label   "Combined Diffuse"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ combineddiffuse == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 combineddiffusefilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "combineddiffuseprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ combineddiffuse == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "combineddiffuseperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ combineddiffuse == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm3"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "directdiffuse"
+                label   "Direct Diffuse"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "directdiffusefilter"
+                label   "Direct Diffuse"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ directdiffuse == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 directdiffusefilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "directdiffuseprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ directdiffuse == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "directdiffuseperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ directdiffuse == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm4"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "indirectdiffuse"
+                label   "Indirect Diffuse"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "indirectdiffusefilter"
+                label   "Indirect Diffuse"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ indirectdiffuse == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 indirectdiffusefilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "indirectdiffuseprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ indirectdiffuse == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "indirectdiffuseperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ indirectdiffuse == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm5"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "combineddiffuseunshadowed"
+                label   "Combined Diffuse Unshadowed"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "combineddiffuseunshadowedfilter"
+                label   "Combined Diffuse Unshadowed"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ combineddiffuseunshadowed == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 combineddiffuseunshadowedfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "combineddiffuseunshadowedprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ combineddiffuseunshadowed == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "combineddiffuseunshadowedperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ combineddiffuseunshadowed == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm6"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "directdiffuseunshadowed"
+                label   "Direct Diffuse Unshadowed"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "directdiffuseunshadowedfilter"
+                label   "Direct Diffuse Unshadowed"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ directdiffuseunshadowed == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 directdiffuseunshadowedfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "directdiffuseunshadowedprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ directdiffuseunshadowed == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "directdiffuseunshadowedperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ directdiffuseunshadowed == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm7"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "indirectdiffuseunshadowed"
+                label   "Indirect Diffuse Unshadowed"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "indirectdiffuseunshadowedfilter"
+                label   "Inirect Diffuse Unshadowed"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ indirectdiffuseunshadowed == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 indirectdiffuseunshadowedfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "indirectdiffuseunshadowedprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ indirectdiffuseunshadowed == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "indirectdiffuseunshadowedperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ indirectdiffuseunshadowed == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm8"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "combinedglossyreflection"
+                label   "Combined Glossy Reflection"
+                type    toggle
+                nolabel
+                joinnext
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "combinedglossyreflectionfilter"
+                label   "Combined Glossy Reflection"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ combinedglossyreflection == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 combinedglossyreflectionfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "combinedglossyreflectionprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ combinedglossyreflection == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "combinedglossyreflectionperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ combinedglossyreflection == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm9"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "directglossyreflection"
+                label   "Direct Glossy Reflection"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "directglossyreflectionfilter"
+                label   "Direct Glossy Reflection"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ directglossyreflection == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 directglossyreflectionfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "directglossyreflectionprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ directglossyreflection == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "directglossyreflectionperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ directglossyreflection == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm10"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "indirectglossyreflection"
+                label   "Indirect Glossy Reflection"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "indirectglossyreflectionfilter"
+                label   "Indirect Glossy Reflection"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ indirectglossyreflection == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 indirectglossyreflectionfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "indirectglossyreflectionprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ indirectglossyreflection == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "indirectglossyreflectionperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ indirectglossyreflection == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm11"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "glossytransmission"
+                label   "Glossy Transmission"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "glossytransmissionfilter"
+                label   "Glossy Transmission"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ glossytransmission == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 glossytransmissionfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "glossytransmissionprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ glossytransmission == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "glossytransmissionperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ glossytransmission == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm12"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "visiblelights"
+                label   "Visible Lights"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "visiblelightsfilter"
+                label   "Visible Lights"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ visiblelights == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 visiblelightsfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "visiblelightsprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ visiblelights == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "visiblelightsperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ visiblelights == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm13"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "combinedemission"
+                label   "Combined Emission"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "combinedemissionfilter"
+                label   "Combined Emission"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ combinedemission == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 combinedemissionfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "combinedemissionprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ combinedemission == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm14"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "directemission"
+                label   "Direct Emission"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "directemissionfilter"
+                label   "Direct Emission"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ directemission == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 directemissionfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "directemissionprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ directemission == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm15"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "indirectemission"
+                label   "Indirect Emission"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "indirectemissionfilter"
+                label   "Indirect Emission"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ indirectemission == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 indirectemissionfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "indirectemissionprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ indirectemission == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm16"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "combinedvolume"
+                label   "Combined Volume"
+                type    toggle
+                nolabel
+                joinnext
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "combinedvolumefilter"
+                label   "Combined Volume"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ combinedvolume == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 combinedvolumefilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "combinedvolumeprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ combinedvolume == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "combinedvolumeperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ combinedvolume == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm17"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "directvolume"
+                label   "Direct Volume"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "directvolumefilter"
+                label   "Direct Volume"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ directvolume == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 directvolumefilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "directvolumeprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ directvolume == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "directvolumeperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ directvolume == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm18"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "indirectvolume"
+                label   "Indirect Volume"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "indirectvolumefilter"
+                label   "Indirect Volume"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ indirectvolume == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 indirectvolumefilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "indirectvolumeprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ indirectvolume == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "indirectvolumeperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ indirectvolume == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm19"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "coat"
+                label   "BSDF Labelled 'coat'"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "coatfilter"
+                label   "BSDF Labelled 'coat'"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ coat == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 coatfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "coatprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ coat == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "coatperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ coat == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm20"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "sss"
+                label   "BSDF Labelled 'sss'"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sssfilter"
+                label   "BSDF Labelled 'sss'"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ sss == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 sssfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "sssprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ sss == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sssperlpe"
+                label   "Split per LPE Tag"
+                type    toggle
+                default { "off" }
+                disablewhen "{ sss == 0 }"
+                range   { 0! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+        }
+
+        groupcollapsible {
+            name    "folder3"
+            label   "Ray Level Outputs"
+            grouptag { "group_type" "collapsible" }
+            grouptag { "visibletabs" "1" }
+
+            parm {
+                name    "P"
+                label   "Ray Origin (O)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "Pfilter"
+                label   "Ray Origin (O)"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ P == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 Pfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "Pprecision"
+                label   "Precision"
+                type    string
+                default { "half3" }
+                disablewhen "{ P == 0 }"
+                menu {
+                    "half3"     "16 Bit"
+                    "float3"    "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm21"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "D"
+                label   "Ray Direction (D)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "Dfilter"
+                label   "Ray Direction (D)"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ D == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 Dfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "Dprecision"
+                label   "Precision"
+                type    string
+                default { "half3" }
+                disablewhen "{ D == 0 }"
+                menu {
+                    "half3"     "16 Bit"
+                    "float3"    "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm22"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "time"
+                label   "Time (Shutter Time)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "timefilter"
+                label   "Time (Shutter Time)"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ time == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 timefilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "timeprecision"
+                label   "Precision"
+                type    string
+                default { "half" }
+                disablewhen "{ time == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm23"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "near"
+                label   "Near (Near Bias)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "nearfilter"
+                label   "Near (Near Bias)"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ near == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 nearfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "nearprecision"
+                label   "Precision"
+                type    string
+                default { "half" }
+                disablewhen "{ near == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm24"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "far"
+                label   "Far (Max Distance)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "farfilter"
+                label   "Far (Max Distance)"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ far == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 farfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "farprecision"
+                label   "Precision"
+                type    string
+                default { "half" }
+                disablewhen "{ far == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm25"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "mask"
+                label   "Mask (Intersection Mask)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "maskfilter"
+                label   "Mask (Intersection Mask)"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ mask == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 maskfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "maskprecision"
+                label   "Precision"
+                type    string
+                default { "half" }
+                disablewhen "{ mask == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm26"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "contrib"
+                label   "Contribution"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "contribfilter"
+                label   "Contribution"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ contrib == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 contribfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "contribprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ contrib == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm27"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "hitP"
+                label   "P (World Space)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "hitPfilter"
+                label   "P (World Space)"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ hitP == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 hitPfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "hitPprecision"
+                label   "Precision"
+                type    string
+                default { "float3" }
+                disablewhen "{ hitP == 0 }"
+                menu {
+                    "half3"     "16 Bit"
+                    "float3"    "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm28"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "hitPz"
+                label   "Depth (Camera Space)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "hitPzfilter"
+                label   "Depth (Camera Space)"
+                type    string
+                joinnext
+                default { "[\"minmax\",{\"mode\":\"zmin\"}]" }
+                disablewhen "{ hitPz == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 hitPzfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "hitPzprecision"
+                label   "Precision"
+                type    string
+                default { "float" }
+                disablewhen "{ hitPz == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm29"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "hitstack"
+                label   "Hit Stack"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "hitstackfilter"
+                label   "Hit Stack"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ hitstack == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 hitstackfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "hitstackprecision"
+                label   "Precision"
+                type    string
+                default { "half" }
+                disablewhen "{ hitstack == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm30"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "element"
+                label   "Element (Raw Id)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "elementfilter"
+                label   "Element (Raw Id)"
+                type    string
+                joinnext
+                default { "[\"minmax\",{\"mode\":\"idcover\"}]" }
+                disablewhen "{ element == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 elementfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "elementprecision"
+                label   "Precision"
+                type    string
+                default { "float" }
+                disablewhen "{ element == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm31"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "primid"
+                label   "Prim Id"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "primidfilter"
+                label   "Prim Id"
+                type    string
+                joinnext
+                default { "[\"minmax\",{\"mode\":\"idcover\"}]" }
+                disablewhen "{ primid == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 primidfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "primidprecision"
+                label   "Precision"
+                type    string
+                default { "float" }
+                disablewhen "{ primid == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm32"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "hituv"
+                label   "UV"
+                type    toggle
+                nolabel
+                joinnext
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "hituvfilter"
+                label   "UV"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ hituv == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 hituvfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "hituvprecision"
+                label   "Precision"
+                type    string
+                default { "float3" }
+                disablewhen "{ hituv == 0 }"
+                menu {
+                    "half3"     "16 Bit"
+                    "float3"    "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm33"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "hitdist"
+                label   "Hit Dist"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "hitdistfilter"
+                label   "Hit Dist"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ hitdist == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 hitdistfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "hitdistprecision"
+                label   "Precision"
+                type    string
+                default { "float" }
+                disablewhen "{ hitdist == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm34"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "dPdz"
+                label   "dPdz"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "dPdzfilter"
+                label   "dPdz"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ dPdz == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 dPdzfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "dPdzprecision"
+                label   "Precision"
+                type    string
+                default { "half" }
+                disablewhen "{ dPdz == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm35"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "hitN"
+                label   "N (Smooth Normal)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "on" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "hitNfilter"
+                label   "N (Smooth Normal)"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ hitN == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 hitNfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "hitNprecision"
+                label   "Precision"
+                type    string
+                default { "half3" }
+                disablewhen "{ hitN == 0 }"
+                menu {
+                    "half3"     "16 Bit"
+                    "float3"    "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm36"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "hitNg"
+                label   "Ng (Geometric Normal)"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "hitNgfilter"
+                label   "Ng (Geometric Normal)"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ hitNg == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 hitNgfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "hitNgprecision"
+                label   "Precision"
+                type    string
+                default { "half3" }
+                disablewhen "{ hitNg == 0 }"
+                menu {
+                    "half3"     "16 Bit"
+                    "float3"    "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm37"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "flags"
+                label   "Flags"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "flagsfilter"
+                label   "Flags"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ flags == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 flagsfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "flagsprecision"
+                label   "Precision"
+                type    string
+                default { "half" }
+                disablewhen "{ flags == 0 }"
+                menu {
+                    "half"  "16 Bit"
+                    "float" "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm38"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "motionvectors"
+                label   "Motion Vectors"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "motionvectorsfilter"
+                label   "Motion Vectors"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ motionvectors == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 motionvectorsfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "motionvectorsprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ motionvectors == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm39"
+                label   "Separator"
+                type    separator
+                default { "" }
+                parmtag { "autoscope" "0000000000000000" }
+            }
+            parm {
+                name    "velocity"
+                label   "Velocity"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "velocityfilter"
+                label   "Velocity"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ velocity == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 velocityfilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "velocityprecision"
+                label   "Precision"
+                type    string
+                default { "color3h" }
+                disablewhen "{ velocity == 0 }"
+                menu {
+                    "color3h"   "16 Bit"
+                    "color3f"   "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+        }
+
+        groupcollapsible {
+            name    "folder4"
+            label   "Raw"
+            grouptag { "group_type" "collapsible" }
+            grouptag { "visibletabs" "1" }
+
+            parm {
+                name    "albedo"
+                label   "Albedo"
+                type    toggle
+                nolabel
+                joinnext
+                default { "off" }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "albedofilter"
+                label   "Albedo"
+                type    string
+                joinnext
+                default { "[\"ubox\",{}]" }
+                disablewhen "{ albedo == 0 }"
+                menureplace {
+                    [ "opmenu -l -a karmastandardrendervars1 albedofilter" ]
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "spare_category" "Image" }
+                parmtag { "uiscope" "None" }
+                parmtag { "usdvaluetype" "string" }
+            }
+            parm {
+                name    "albedoprecision"
+                label   "Precision"
+                type    string
+                default { "half3" }
+                disablewhen "{ albedo == 0 }"
+                menu {
+                    "half3"     "16 Bit"
+                    "float3"    "32 Bit"
+                }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+        }
+
+    }
+
+    group {
+        name    "folder0_1"
+        label   "Custom AOVs"
+
+        multiparm {
+            name    "rendervars"
+            label    "Render Vars"
+            default 0
+            parmtag { "autoscope" "0000000000000000" }
+
+            parm {
+                name    "enable#"
+                label   "Enable"
+                type    toggle
+                default { "1" }
+                parmtag { "script_callback_language" "python" }
+            }
+            groupsimple {
+                name    "folder0_#"
+                label   "Render Var"
+                disablewhen "{ enable# == 0 }"
+
+                parm {
+                    name    "name#"
+                    label   "Name"
+                    type    string
+                    default { "" }
+                    menureplace {
+                        [ "kwargs[\"node\"].hm().getAOVMenu()" ]
+                        language python
+                    }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "script_callback" "kwargs[\"node\"].hm().setAOV(kwargs)" }
+                    parmtag { "script_callback_language" "python" }
+                    parmtag { "usdvaluetype" "string" }
+                }
+                parm {
+                    name    "format#"
+                    label   "Format"
+                    type    string
+                    default { "float" }
+                    disablewhen "{ name# == \"\" }"
+                    menu {
+                        [ "values = [\"float\",\"color2f\",\"color3f\",\"color4f\",\"float2\",\"float3\",\"float4\"]" ]
+                        [ "values += [\"half\",\"float16\",\"color2h\",\"color3h\",\"color4h\",\"half2\",\"half3\",\"half4\"]" ]
+                        [ "values += [\"u8\",\"uint8\",\"color2u8\",\"color3u8\",\"color4u8\"]" ]
+                        [ "values += [\"i8\",\"int8\",\"color2i8\",\"color3i8\",\"color4i8\"]" ]
+                        [ "values += [\"int\",\"int2\",\"int3\",\"int4\",\"uint\",\"uint2\",\"uint3\",\"uint4\"]" ]
+                        [ "" ]
+                        [ "return [x for x in values for y in range(2)]" ]
+                        language python
+                    }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "usdvaluetype" "string" }
+                }
+                parm {
+                    name    "multisampled#"
+                    label   "Multi Sampled"
+                    type    toggle
+                    default { "off" }
+                    disablewhen "{ name# == \"\" }"
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "usdvaluetype" "bool" }
+                }
+                parm {
+                    name    "clearvalue#"
+                    label   "Clear Value"
+                    type    integer
+                    default { "0" }
+                    disablewhen "{ name# == \"\" }"
+                    range   { 0 10 }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "usdvaluetype" "int" }
+                }
+                parm {
+                    name    "dataType#"
+                    label   "Data Type"
+                    type    string
+                    default { "color3f" }
+                    disablewhen "{ name# == \"\" }"
+                    menu {
+                        [ "import loputils" ]
+                        [ "return loputils.createAttribTypeMenu()" ]
+                        language python
+                    }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "script_callback_language" "python" }
+                    parmtag { "usdvaluetype" "token" }
+                }
+                parm {
+                    name    "sourceName#"
+                    label   "Source Name"
+                    type    string
+                    default { "" }
+                    disablewhen "{ name# == \"\" }"
+                    menureplace {
+                        [ "retval = [\"_separator_\", \"---------\"]" ]
+                        [ "" ]
+                        [ "retval += [\"C.*\", \"LPE:Beauty\"]" ]
+                        [ "retval += [\"unoccluded;C.*\", \"LPE:Beauty Unshadowed\"]" ]
+                        [ "retval += [\"C<RD>.*\", \"LPE:Combined Diffuse\"]" ]
+                        [ "retval += [\"C<RD>L\", \"LPE:Direct Diffuse\"]" ]
+                        [ "retval += [\"C<RD>.+L\", \"LPE:Indirect Diffuse\"]" ]
+                        [ "retval += [\"unoccluded;C<RD>.*\", \"LPE:Combined Diffuse Unshadowed\"]" ]
+                        [ "retval += [\"unoccluded;C<RD>L\", \"LPE:Direct Diffuse Unshadowed\"]" ]
+                        [ "retval += [\"unoccluded;C<RD>.+L\", \"LPE:Indirect Diffuse Unshadowed\"]" ]
+                        [ "return retval" ]
+                        language python
+                    }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "usdvaluetype" "string" }
+                }
+                parm {
+                    name    "sourceType#"
+                    label   "Source Type"
+                    type    string
+                    default { "raw" }
+                    disablewhen "{ name# == \"\" }"
+                    menu {
+                        "raw"       "Raw"
+                        "primvar"   "Primvar"
+                        "lpe"       "LPE"
+                        "intrinsic" "Intrinsic"
+                    }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "usdvaluetype" "token" }
+                }
+                groupsimple {
+                    name    "folder0_#_2"
+                    label   "Karma"
+                    disablewhentab "{ name# == \"\" }"
+
+                    parm {
+                        name    "filter#"
+                        label   "Pixel Filter"
+                        type    string
+                        default { "[\"ubox\",{}]" }
+                        menureplace {
+                            "[\"ubox\",{}]"                         "Unit Box Filter"
+                            "[\"gauss\",{\"width\":2}]"             "Gaussian 2x2"
+                            "[\"gauss\",{\"width\":3}]"             "Gaussian 3x3 (softer)"
+                            "[\"barlett\", {\"width\":2}]"          "Barlett (triangle)"
+                            "[\"catrom\",{\"width\":3}]"            "Catmull-Rom 3x3"
+                            "[\"hanning\", {\"width\":2}]"          "Hanning"
+                            "[\"blackman\", {\"width\":2}]"         "Blackman"
+                            "[\"sinc\", {\"width\":3}]"             "Sinc (sharpening)"
+                            "[\"edgedetect\", {}]"                  "Edge Detection Filter"
+                            "[\"minmax\",{\"mode\":\"min\"}]"       "Sample: Minimum Value"
+                            "[\"minmax\",{\"mode\":\"max\"}]"       "Sample: Maximum Value"
+                            "[\"minmax\",{\"mode\":\"median\"}]"    "Sample: Median Value"
+                            "[\"minmax\",{\"mode\":\"edge\"}]"      "Disable Edge Antialiasing"
+                            "[\"minmax\",{\"mode\":\"ocover\"}]"    "Object With Most Pixel Coverage (average)"
+                            "[\"minmax\",{\"mode\":\"idcover\"}]"   "Object With Most Coverage (no filtering)"
+                            "[\"minmax\",{\"mode\":\"omin\"}]"      "Object With Most Coverage (minimum z-value)"
+                            "[\"minmax\",{\"mode\":\"omax\"}]"      "Object With Most Coverage (maximum z-value)"
+                            "[\"minmax\",{\"mode\":\"omedian\"}]"   "Object With Most Coverage (median z-value)"
+                        }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "spare_category" "Image" }
+                        parmtag { "uiscope" "None" }
+                        parmtag { "usdvaluetype" "string" }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+}

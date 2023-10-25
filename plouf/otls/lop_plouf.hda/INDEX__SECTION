@@ -1,0 +1,85 @@
+Operator:     firemen::dev::publishasset::1.0
+Label:        Publish Asset
+Path:         oplib:/firemen::dev::Lop/publishasset::1.0?firemen::dev::Lop/publishasset::1.0
+Icon:         LOP_sopcreate
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       1 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Wed Feb  8 10:59:39 2023
+
+Operator:     firemen::dev::publishshot::1.0
+Label:        Publish Shot
+Path:         oplib:/firemen::dev::Lop/publishshot::1.0?firemen::dev::Lop/publishshot::1.0
+Icon:         LOP_sceneimport
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       1 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Sun Apr 30 18:51:17 2023
+
+Operator:     firemen::dev::loadshot::1.0
+Label:        Load Shot
+Path:         oplib:/firemen::dev::Lop/loadshot::1.0?firemen::dev::Lop/loadshot::1.0
+Icon:         LOP_sublayer
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       0 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Sat May 13 09:51:47 2023
+
+Operator:     firemen::dev::loadasset::1.0
+Label:        Load Asset
+Path:         oplib:/firemen::dev::Lop/loadasset::1.0?firemen::dev::Lop/loadasset::1.0
+Icon:         LOP_reference
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       0 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Wed Feb 22 10:46:56 2023
+
+Operator:     firemen::dev::loadcache::1.0
+Label:        Load Cache
+Path:         oplib:/firemen::dev::Lop/loadcache::1.0?firemen::dev::Lop/loadcache::1.0
+Icon:         LOP_filecache
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       0 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Wed May 10 13:33:18 2023
+
+Operator:     firemen::dev::publishrender
+Label:        Publish Render
+Path:         oplib:/firemen::dev::Lop/publishrender?firemen::dev::Lop/publishrender
+Icon:         ROP_usdrender
+Table:        Lop
+License:      
+Extra:        visibleoutputs=0 
+User:         
+Inputs:       1 to 99
+Outputs:      0
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Wed Apr 26 10:42:06 2023
+

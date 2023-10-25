@@ -1,0 +1,42 @@
+Operator:     importtrackabc
+Label:        Track Import
+Path:         oplib:/Lop/importtrackabc?Lop/importtrackabc
+Icon:         LOP_camera
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       0 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Mon Apr  3 13:31:21 2023
+
+Operator:     alembic_import
+Label:        Alembic Import
+Path:         oplib:/Lop/alembic_import?Lop/alembic_import
+Icon:         SOP_alembic
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       0 to 0
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Thu Jan  5 09:59:37 2023
+
+Operator:     firemen::dev::importriganim
+Label:        Import Rig Anim
+Path:         oplib:/firemen::dev::Lop/importriganim?firemen::dev::Lop/importriganim
+Icon:         SOP_kinefx-agentcharacterunpack
+Table:        Lop
+License:      
+Extra:        
+User:         
+Inputs:       0 to 1
+Subnet:       true
+Python:       false
+Empty:        false
+Modified:     Fri Apr 21 18:57:38 2023
+

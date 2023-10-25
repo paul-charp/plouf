@@ -1,0 +1,319 @@
+# Dialog script for firemen::dev::loadcache::1.0 automatically generated
+
+{
+    name	firemen::dev::loadcache::1.0
+    script	publish_model_abc
+    label	"Load Cache"
+
+    help {
+	""
+    }
+
+    inputlabel	1	"Input Stage"
+    inputlabel	2	"Input 2"
+    inputlabel	3	"Input 3"
+    inputlabel	4	"Input 4"
+
+    groupsimple {
+        name    "folder19"
+        label   "ASSET SELECTION"
+
+        parm {
+            name    "sepparm8"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "explore"
+            label   "Explore"
+            type    button
+            joinnext
+            default { "0" }
+            parmtag { "script_callback" "hou.phm().explore(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "reload"
+            label   "Reload"
+            type    button
+            default { "0" }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "button_icon" "" }
+            parmtag { "script_callback" "" }
+            parmtag { "script_callback_language" "python" }
+            parmtag { "takecontrol" "always" }
+        }
+        parm {
+            name    "sepparm9"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "publish_path_info"
+            label   "Publish Path :"
+            type    label
+            nolabel
+            default { "" }
+        }
+        parm {
+            name    "sepparm2"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "entity_type"
+            label   "Entity Type"
+            type    string
+            joinnext
+            default { "assets" }
+            menu {
+                "assets"    "assets"
+                "shots"     "shots"
+            }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "history_version"
+            label   "version"
+            type    string
+            invisible
+            nolabel
+            default { "v000" }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm11"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "entity_subtype"
+            label   "Asset Type / Sequence"
+            type    string
+            default { "prop" }
+            menureplace {
+                [ "from plouf import utils, Publish" ]
+                [ "import os" ]
+                [ "" ]
+                [ "node = hou.node('.')" ]
+                [ "" ]
+                [ "publish = Publish.Publish(node)" ]
+                [ "" ]
+                [ "path = os.path.join(publish.root," ]
+                [ "                    publish.project," ]
+                [ "                    publish.entity_type)" ]
+                [ "                    " ]
+                [ "return utils.menuFromDir(path)" ]
+                language python
+            }
+            parmtag { "editor" "0" }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm4"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "entity_name"
+            label   "Asset Name / Shot"
+            type    string
+            default { "asset" }
+            menureplace {
+                [ "from plouf import utils, Publish" ]
+                [ "import os" ]
+                [ "" ]
+                [ "node = hou.node('.')" ]
+                [ "" ]
+                [ "publish = Publish.Publish(node)" ]
+                [ "" ]
+                [ "path = os.path.join(publish.root," ]
+                [ "                    publish.project," ]
+                [ "                    publish.entity_type," ]
+                [ "                    publish.entity_subtype)" ]
+                [ "                    " ]
+                [ "return utils.menuFromDir(path)" ]
+                language python
+            }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "export_disable" "1" }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm5"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "task_name"
+            label   "Task Name"
+            type    string
+            default { "modeling_main" }
+            menureplace {
+                "layout_main"               "layout_main"
+                "animation_main"            "animation_main"
+                "animation_blocking"        "animation_blocking"
+                "animation_polish"          "animation_polish"
+                "fx_main"                   "fx_main"
+                "fx_extrafx"                "fx_extrafx"
+                "finallayout_main"          "finallayout_main"
+                "finallayout_environment"   "finallayout_environment"
+                "finallayout_setdress"      "finallayout_setdress"
+                "modeling_main"             "modeling_main"
+                "surfacing_main"            "surfacing_main"
+            }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm3"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "publish_name"
+            label   "Publish Name"
+            type    string
+            default { "main" }
+            menureplace {
+                [ "from plouf import utils, Publish" ]
+                [ "import os" ]
+                [ "" ]
+                [ "node = hou.node('.')" ]
+                [ "" ]
+                [ "publish = Publish.Publish(node)" ]
+                [ "" ]
+                [ "path = os.path.join(publish.root," ]
+                [ "                    publish.project," ]
+                [ "                    publish.entity_type," ]
+                [ "                    publish.entity_subtype," ]
+                [ "                    publish.entity_name," ]
+                [ "                    publish.task_name," ]
+                [ "                    'publish'," ]
+                [ "                    'v000'," ]
+                [ "                    publish.file_ext)" ]
+                [ "                    " ]
+                [ "return utils.menuFromDir(path)" ]
+                language python
+            }
+            parmtag { "script_callback" "hou.phm().cb_path(kwargs)" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm10"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+    }
+
+    groupsimple {
+        name    "folder2"
+        label   "LOAD SETTINGS"
+
+        parm {
+            name    "reftype1"
+            label   "Reference Type"
+            type    string
+            default { "file" }
+            menu {
+                "file"      "Reference File"
+                "payload"   "Payload File"
+            }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "primcount1"
+            label   "Primitive Count"
+            type    integer
+            default { "1" }
+            range   { 0 10 }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "timeoffset1"
+            label   "Time Offset (in Frames)"
+            type    float
+            default { "0" }
+            range   { -100 100 }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm7"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "instanceable1"
+            label   "Make Instanceable"
+            type    toggle
+            default { "off" }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "parentprim"
+            label   "Parent Prim"
+            type    string
+            default { "/scene" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm6"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "t_custom_name"
+            label   "Use Custom Reference Name"
+            type    toggle
+            default { "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "custom_name"
+            label   "Reference Name"
+            type    string
+            default { "$OS" }
+            disablewhen "{ t_custom_name == 0 }"
+            parmtag { "script_callback_language" "python" }
+        }
+    }
+
+}

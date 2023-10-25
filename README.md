@@ -25,4 +25,4 @@ Behind it the python package "plouf" powers the hdas and manages naming conventi
 Other that load & publish nodes you have some various utility nodes that we've used on Firemen, for importing tracking abc from nuke properly, to setup render layers in Karma, etc ...
 
 ## References
-[Githug repo of ArtFX](https://github.com/ArtFXDev) (You can find the "Silex" pipeline and tools that we used with plouf)
+[Github repo of ArtFX](https://github.com/ArtFXDev) (You can find the "Silex" pipeline and tools that we used with plouf)

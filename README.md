@@ -11,9 +11,9 @@ So Plouf stands for :
 The main goals developing plouf : 
 - Work **with** the school pipeline, not against it (so matching the naming convention and folder structure)
 - Be **artist friendly** (providing tools to automate and ease technical tasks in Solaris)
-- Be kind of **production ready**
+- Be kind of **production ready** as quick as possible
 
-So I developed plouf rather quickly to anwser a very specific and target need, so in no case it's a meant to work right now on another project. 
+So I developed plouf rather quickly to anwser a very specific and targeted need, so in no case it's a meant to work right now on another project. 
 The main reason it is here on github is for reference and archive. 
 (That said it should kind of work)
 

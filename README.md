@@ -24,5 +24,9 @@ Behind it the python package "plouf" powers the hdas and manages naming conventi
 
 Other that load & publish nodes you have some various utility nodes that we've used on Firemen, for importing tracking abc from nuke properly, to setup render layers in Karma, etc ...
 
+## Unpacked HDA
+Note that all the HDA in this `otls` directory are in an 'unpacked' format. If you want to repack them see :
+[Working with files and assets as text](https://www.sidefx.com/docs/houdini/assets/textfiles.html)
+
 ## References
 [Github repo of ArtFX](https://github.com/ArtFXDev) (You can find the "Silex" pipeline and tools that we used with plouf)
